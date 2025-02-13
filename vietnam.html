@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vietnam // NKS MAPS</title>
+  <link rel='stylesheet' href=`https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css` />
+  <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+  </style>
+  <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+  <script src=`https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js`></script>
+</head>
+<body>
+  <div class="map" id='map'></div>
+  <script>
+    const map = new maplibregl.Map({
+        container: 'map',
+        style:
+            `https://api.maptiler.com/maps/streets/style.json?key=6wfu5yNV5FuNe7KZBW8X`,
+        center: [106.68093682970152,10.786606508417522],
+        zoom: 5
+    });
 
+    map.on('load', () => {
+        map.addSource('vietnam', {
+            'type': 'geojson',
+            'data': `vietnam.geojson`
+        });
+        map.addLayer({
+            'id': 'vnpoly',
+            'type': 'fill',
+            'source': 'maine',
+            'layout': {},
+            'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.8
+            }
+        });
+    });
+</script>
+    
+</body>
+</html>
