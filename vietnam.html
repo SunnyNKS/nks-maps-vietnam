@@ -24,12 +24,12 @@
     map.on('load', () => {
         map.addSource('vietnam', {
             'type': 'geojson',
-            'data': `https://raw.githubusercontent.com/SunnyNKS/nks-maps-vietnam/main/vietnam.geojson`
+            'data': `vietnam.geojson`
         });
         map.addLayer({
             'id': 'vnpoly',
             'type': 'fill',
-            'source': 'maine',
+            'source': 'vietnam',
             'layout': {},
             'paint': {
                 'fill-color': '#088',
