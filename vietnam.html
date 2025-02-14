@@ -21,6 +21,11 @@
         zoom: 5
     });
 
+    // create the popup
+    const popup = new maplibregl.Popup({offset: 25}).setText(
+        'Ha Noi Capital'
+    );
+    
     map.on('load', () => {
         map.addSource('vietnam', {
             'type': 'geojson',
@@ -41,6 +46,10 @@
             [100.95240941709326,7.360757345815404],
             [118.61631636590472,24.354966999580153]
         ]);
+    const marker = new maplibregl.Marker()
+        .setLngLat([105.815622,ss21.019218])
+        .setPopup(popup)
+        .addTo(map);
 </script>
     
 </body>
