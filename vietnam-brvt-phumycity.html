@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Phu My City // Bà Rịa Vũng Tàu // Vietnam Map // NKS MAPS</title>
+  <link rel='stylesheet' href='maplibre.css' />
+  <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+  </style>
+</head>
+<body>
+  <div class="map" id='map'></div>
+  <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+  <script src='maplibre.js'></script>
+  <script>
+    const map = new maplibregl.Map({
+        container: 'map',
+        style:
+            `https://api.maptiler.com/maps/streets/style.json?key=6wfu5yNV5FuNe7KZBW8X`,
+        center: [106.68093682970152,10.786606508417522],
+        zoom: 5
+    });
+
+    // create the popup
+    const popup = new maplibregl.Popup({offset: 25}).setText(
+        'Phú Mỹ City'
+    );
+    
+    map.on('load', () => {
+        map.addSource('vietnam', {
+            'type': 'geojson',
+            'data': `https://data.nks.vn/api/nks/administrative/thanh-pho-phu-my-4e559963/geojson`
+        });
+        map.addLayer({
+            'id': 'vnpoly',
+            'type': 'fill',
+            'source': 'vietnam',
+            'layout': {},
+            'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.8
+            }
+        });
+    });
+    map.fitBounds([
+            [107.17310141332683,10.719560572421031],
+            [106.99362363192654,10.46377364647796]
+        ]);
+</script>
+    
+</body>
+</html>
