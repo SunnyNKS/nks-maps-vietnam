@@ -27,20 +27,30 @@
     );
     
     map.on('load', () => {
-        map.addSource('vietnam', {
+        map.addSource('phumycity', {
             'type': 'geojson',
             'data': `https://data.nks.vn/api/nks/administrative/thanh-pho-phu-my-4e559963/geojson?childs=true`
         });
         map.addLayer({
-            'id': 'vnpoly',
+            'id': 'poly',
             'type': 'fill',
-            'source': 'vietnam',
+            'source': 'phumycity',
             'layout': {},
             'paint': {
-                'fill-color': '#088',
-                'fill-opacity': 0.8
+                'fill-color': '#0077bb',
+                'fill-opacity': 0.5
             }
         });
+      map.addLayer({
+        'id': 'poly-outline',
+        'type': 'line',
+        'source': 'phumycity',
+        'layout': {},
+        'paint': {
+            'line-color': '#0077bb',
+            'line-width': 2
+        }
+    });
     });
     map.fitBounds([
             [107.17310141332683,10.719560572421031],
