@@ -50,12 +50,32 @@
             'line-color': '#0077bb',
             'line-width': 2
         }
+      });
     });
-    });
+    
     map.fitBounds([
             [107.17310141332683,10.719560572421031],
             [106.99362363192654,10.46377364647796]
         ]);
+
+    // When a click event occurs on a feature in the states layer, open a popup at the
+    // location of the click, with description HTML from its properties.
+    map.on('click', 'poly', (e) => {
+        new maplibregl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.name)
+            .addTo(map);
+    });
+
+    // Change the cursor to a pointer when the mouse is over the states layer.
+    map.on('mouseenter', 'poly', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'poly', () => {
+        map.getCanvas().style.cursor = '';
+    });
 </script>
     
 </body>
