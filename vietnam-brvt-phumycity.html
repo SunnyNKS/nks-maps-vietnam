@@ -12,17 +12,7 @@
   <div class="map" id='map'></div>
   <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
   <script src='maplibre.js'></script>
-  <script>
-    let letters = "0123456789ABCDEF"; 
-  
-    // HTML color code starts with # 
-    let color = '#'; 
-      
-    // Generating 6 times as HTML color code  
-    // consist of 6 letter or digits 
-    for (let i = 0; i < 6; i++) 
-        color += letters[(Math.floor(Math.random() * 16))]; 
-    
+  <script>   
     const map = new maplibregl.Map({
         container: 'map',
         style:
@@ -47,7 +37,7 @@
             'source': 'phumycity',
             'layout': {},
             'paint': {
-                'fill-color': color,
+                'fill-color': '#'+(Math.random() * 0xfffff * 1000000).toString(16).slice(0, 6),
                 'fill-opacity': 0.5
             }
         });
