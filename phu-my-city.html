@@ -29,7 +29,7 @@
     map.on('load', () => {
         map.addSource('vietnam', {
             'type': 'geojson',
-            'data': `https://data.nks.vn/api/nks/administrative/thanh-pho-phu-my-4e559963/geojson`
+            'data': `https://data.nks.vn/api/nks/administrative/thanh-pho-phu-my-4e559963/geojson?childs=true`
         });
         map.addLayer({
             'id': 'vnpoly',
