@@ -37,7 +37,7 @@
             'source': 'phumycity',
             'layout': {},
             'paint': {
-                'fill-color': '#'+(Math.random() * 0xfffff * 1000000).toString(16).slice(0, 6),
+                'fill-color': ['get', 'fillcolor'],
                 'fill-opacity': 0.5
             }
         });
