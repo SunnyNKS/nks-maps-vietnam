@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>District 6 // Ho Chi Minh City // Vietnam Map // NKS MAPS</title>
+  <link rel='stylesheet' href='maplibre.css' />
+  <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+  </style>
+</head>
+<body>
+  <div class="map" id='map'></div>
+  <script src='jquery.js'></script>
+  <script src='maplibre.js'></script>
+  <script>   
+    const map = new maplibregl.Map({
+        container: 'map',
+        style:
+            `https://api.maptiler.com/maps/streets/style.json?key=6wfu5yNV5FuNe7KZBW8X`,
+        center: [106.68093682970152,10.786606508417522],
+        zoom: 5
+    });
+    
+    map.on('load', () => {
+        map.addSource('hcmcity', {
+            'type': 'geojson',
+            'data': `https://data.nks.vn/api/nks/administrative/quan-6-416a9944/geojson?childs=true`
+        });
+        map.addLayer({
+            'id': 'poly',
+            'type': 'fill',
+            'source': 'hcmcity',
+            'layout': {},
+            'paint': {
+                'fill-color': ['get', 'fillcolor'],
+                'fill-opacity': 0.5
+            }
+        });
+      map.addLayer({
+        'id': 'poly-outline',
+        'type': 'line',
+        'source': 'hcmcity',
+        'layout': {},
+        'paint': {
+            'line-color': '#0077bb',
+            'line-width': 2
+        }
+      });
+    });
+    
+    map.fitBounds([
+            [106.65625538030469,10.763377264162884],
+            [106.61880244222692,10.728004143312972]
+        ]);
+
+    // When a click event occurs on a feature in the states layer, open a popup at the
+    // location of the click, with description HTML from its properties.
+    map.on('click', 'poly', (e) => {
+        new maplibregl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.name)
+            .addTo(map);
+    });
+
+    // Change the cursor to a pointer when the mouse is over the states layer.
+    map.on('mouseenter', 'poly', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'poly', () => {
+        map.getCanvas().style.cursor = '';
+    });
+$(document).ready(function(){
+    $(".maplibregl-ctrl-bottom-right").html('<details class="maplibregl-ctrl maplibregl-ctrl-attrib maplibregl-compact maplibregl-compact-show" open=""><summary class="maplibregl-ctrl-attrib-button" title="Toggle attribution" aria-label="Toggle attribution"></summary><div class="maplibregl-ctrl-attrib-inner"><a href="https://nks.com.vn" target="_blank">© NKS</a> 2024 - Openstreetmap</div></details>');
+});
+</script>
+    
+</body>
+</html>
